@@ -7,7 +7,9 @@ public enum Properties {
     EXTRACT_AUDIO("--extract-audio"),
     IGNORE_ERRORS("--ignore-errors"),
     SKIP_DOWNLOAD("--skip-download"),
-    PRINT_JSON("--print-json");
+    PRINT_JSON("--print-json"),
+    EXTRACT_AUDIO("--extract-audio"),
+    VERBOSE("--verbose");
 
     private final String property;
     private String value;
