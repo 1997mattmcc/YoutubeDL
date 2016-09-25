@@ -6,7 +6,8 @@ public enum Options {
     PLAYLIST_ITEMS("--playlist-items"),
     AUDIO_FORMAT("--audio-format"),
     OUTPUT("--output"),
-    FORMAT("--format");
+    FORMAT("--format"),
+    AUDIO_QUALITY("--audio-quality");
 
     private final String argument;
 
