@@ -4,21 +4,23 @@ public enum Properties {
 
     YOUTUBE_SKIP_DASH_MANIFEST("--youtube-skip-dash-manifest"),
     WRITE_INFO_JSON("--write-info-json"),
+    ABORT_ON_ERRORS("--abort-on-error"),
     EXTRACT_AUDIO("--extract-audio"),
+    FLAT_PLAYLIST("--flat-playlist"),
     IGNORE_ERRORS("--ignore-errors"),
     SKIP_DOWNLOAD("--skip-download"),
     PRINT_JSON("--print-json"),
-    EXTRACT_AUDIO("--extract-audio"),
-    VERBOSE("--verbose");
+    VERBOSE("--verbose"),
+    VERSION("--version"),
+    HELP("--help");
 
     private final String property;
-    private String value;
 
     private Properties(String property) {
         this.property = property;
     }
 
-    public final String getValue() {
+    public String getValue() {
         return property;
     }
 }
