@@ -20,7 +20,8 @@ public enum Properties {
         this.property = property;
     }
 
-    public String getValue() {
+    @Override
+    public String toString() {
         return property;
     }
 }

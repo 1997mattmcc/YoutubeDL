@@ -11,13 +11,14 @@ public enum Options {
     FORMAT("--format"),
     EXEC("--exec");
 
-    private final String argument;
+    private final String option;
 
-    private Options(String argument) {
-        this.argument = argument;
+    private Options(String option) {
+        this.option = option;
     }
 
-    public String getValue() {
-        return argument;
+    @Override
+    public String toString() {
+        return option;
     }
 }

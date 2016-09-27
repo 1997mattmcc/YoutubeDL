@@ -35,12 +35,12 @@ public class YoutubeDL implements Runnable {
         return terminationLogger;
     }
 
-    public Consumer<String> getConsoleLogger() {
-        return consoleLogger;
-    }
-
     public EnumMap<Options, String> getOptions() {
         return options;
+    }
+
+    public Consumer<String> getConsoleLogger() {
+        return consoleLogger;
     }
 
     public EnumSet<Properties> getProperties() {
@@ -91,13 +91,13 @@ public class YoutubeDL implements Runnable {
 
     public static String getOptionsAsString(EnumMap<Options, String> options) {
         return options.entrySet().stream().map(entry -> {
-            return String.join(" ", entry.getKey().getValue(), entry.getValue());
+            return String.join(" ", entry.getKey().toString(), entry.getValue());
         }).collect(Collectors.joining(", "));
     }
 
     public static String getPropertiesAsString(EnumSet<Properties> properties) {
         return properties.stream().map(property -> {
-            return property.getValue();
+            return property.toString();
         }).collect(Collectors.joining(", "));
     }
 
