@@ -21,18 +21,20 @@ public final class YoutubeDL implements Runnable {
 
     private static String executable = "youtube-dl";
 
-    private final EnumSet<Properties> properties = EnumSet.noneOf(Properties.class);
-    private final EnumMap<Options, String> options = new EnumMap(Options.class);
     private final Consumer<List<String>> terminationLogger;
-    private final List<String> urls = new ArrayList<>();
+    private final Consumer<String> initiationLogger;
+    private final EnumMap<Options, String> options;
     private final Consumer<String> consoleLogger;
+    private final EnumSet<Properties> properties;
+    private final List<String> urls;
 
     public YoutubeDL(YoutubeDLBuilder builder) {
         this.terminationLogger = builder.terminationLogger;
+        this.initiationLogger = builder.initiationLogger;
         this.consoleLogger = builder.consoleLogger;
-        this.properties.addAll(builder.properties);
-        this.options.putAll(builder.options);
-        this.urls.addAll(builder.urls);
+        this.properties = builder.properties;
+        this.options = builder.options;
+        this.urls = builder.urls;
     }
 
     private final void logged(String consoleLine) {
@@ -47,12 +49,19 @@ public final class YoutubeDL implements Runnable {
         }
     }
 
+    private final void initiated(String command) {
+        if (Objects.nonNull(initiationLogger)) {
+            initiationLogger.accept(command);
+        }
+    }
+
     @Override
     public final void run() {
-        Logger.getLogger(YoutubeDL.class.getName()).setLevel(Level.ALL);
+        String command = this.toString();
         try {
+            this.initiated(command);
             List<String> consoleLog = new ArrayList<>();
-            Process process = Runtime.getRuntime().exec(this.toString());
+            Process process = Runtime.getRuntime().exec(command);
             try (InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream())) {
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 for (String line = bufferedReader.readLine(); Objects.nonNull(line); line = bufferedReader.readLine()) {
