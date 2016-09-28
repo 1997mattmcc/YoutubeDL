@@ -12,6 +12,9 @@ public enum Properties {
     PRINT_JSON("--print-json"),
     VERBOSE("--verbose"),
     VERSION("--version"),
+    GET_URL("--get-url"),
+    GET_ID("--get-id"),
+    QUIET("--quiet"),
     HELP("--help");
 
     private final String property;
