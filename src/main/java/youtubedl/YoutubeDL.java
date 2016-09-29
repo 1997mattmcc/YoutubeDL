@@ -21,20 +21,20 @@ public final class YoutubeDL implements Runnable {
 
     private static String executable = "youtube-dl";
 
+    private final EnumSet<Properties> properties = EnumSet.noneOf(Properties.class);
+    private final EnumMap<Options, String> options = new EnumMap(Options.class);
+    private final List<String> urls = new ArrayList<>();
     private final Consumer<List<String>> terminationLogger;
     private final Consumer<String> initiationLogger;
-    private final EnumMap<Options, String> options;
     private final Consumer<String> consoleLogger;
-    private final EnumSet<Properties> properties;
-    private final List<String> urls;
 
     public YoutubeDL(YoutubeDLBuilder builder) {
         this.terminationLogger = builder.terminationLogger;
         this.initiationLogger = builder.initiationLogger;
         this.consoleLogger = builder.consoleLogger;
-        this.properties = builder.properties;
-        this.options = builder.options;
-        this.urls = builder.urls;
+        this.properties.addAll(builder.properties);
+        this.options.putAll(builder.options);
+        this.urls.addAll(builder.urls);
     }
 
     private final void logged(String consoleLine) {
