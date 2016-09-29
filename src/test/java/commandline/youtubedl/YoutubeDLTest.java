@@ -1,9 +1,5 @@
 package commandline.youtubedl;
 
-import commandline.youtubedl.YoutubeDL;
-import commandline.youtubedl.Options;
-import commandline.youtubedl.YoutubeDLBuilder;
-
 public class YoutubeDLTest {
 
     public static void main(String[] args) {
