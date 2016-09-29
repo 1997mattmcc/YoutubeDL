@@ -1,11 +1,11 @@
-package youtubedl.builders;
+package commandline.youtubedl.builders;
 
+import commandline.youtubedl.YoutubeDLBuilder;
 import org.apache.commons.io.FilenameUtils;
+import commandline.youtubedl.Properties;
+import commandline.youtubedl.Options;
 import java.util.function.Consumer;
-import youtubedl.YoutubeDLBuilder;
-import youtubedl.Properties;
 import java.util.ArrayList;
-import youtubedl.Options;
 import java.util.List;
 import java.io.File;
 
@@ -29,7 +29,6 @@ public class YoutubeGetMP3s extends YoutubeDLBuilder {
         super.option(Options.EXEC, "\"echo {}\"");
 
         super.property(Properties.YOUTUBE_SKIP_DASH_MANIFEST);
-        super.property(Properties.WRITE_INFO_JSON);
         super.property(Properties.IGNORE_ERRORS);
         super.property(Properties.EXTRACT_AUDIO);
         super.property(Properties.QUIET);
@@ -56,13 +55,18 @@ public class YoutubeGetMP3s extends YoutubeDLBuilder {
 
     private void consoleLogged(String consoleLog) {
         File file = new File(consoleLog.replaceAll("'", ""));
-        pending.remove(FilenameUtils.removeExtension(file.getName()));
+        String id = FilenameUtils.removeExtension(file.getName());
+        while (!pending.get(0).equals(id)) {
+            fileConsumer.accept(new File(String.format("%s%s.mp3", destination, pending.remove(0))));
+        }
+        pending.remove(id);
         fileConsumer.accept(file);
     }
 
     private void termination(List<String> consoleLog) {
-        pending.stream().forEach((id) -> fileConsumer.accept(new File(String.format("%s%s.mp3", destination, id))));
-        pending.clear();
+        while (pending.size() > 0) {
+            fileConsumer.accept(new File(String.format("%s%s.mp3", destination, pending.remove(0))));
+        }
         downloading = false;
         if (!queued.isEmpty()) {
             this.download(new String());

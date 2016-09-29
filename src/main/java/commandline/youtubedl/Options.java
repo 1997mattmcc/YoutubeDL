@@ -1,4 +1,4 @@
-package youtubedl;
+package commandline.youtubedl;
 
 public enum Options {
 

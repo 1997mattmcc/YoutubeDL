@@ -1,6 +1,7 @@
-package youtubedl.builders;
+package commandline.youtubedl.builders;
 
-import youtubedl.YoutubeDL;
+import commandline.youtubedl.builders.YoutubeGetIDs;
+import commandline.youtubedl.YoutubeDL;
 import java.util.Arrays;
 
 public class YoutubeGetIDsTest {

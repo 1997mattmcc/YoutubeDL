@@ -1,4 +1,4 @@
-package youtubedl;
+package commandline.youtubedl;
 
 import java.util.function.Consumer;
 import java.util.stream.Collectors;

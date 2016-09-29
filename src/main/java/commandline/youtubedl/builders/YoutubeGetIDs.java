@@ -1,8 +1,8 @@
-package youtubedl.builders;
+package commandline.youtubedl.builders;
 
 import java.util.function.Consumer;
-import youtubedl.YoutubeDLBuilder;
-import youtubedl.Properties;
+import commandline.youtubedl.YoutubeDLBuilder;
+import commandline.youtubedl.Properties;
 import java.util.ArrayList;
 import java.util.List;
 
