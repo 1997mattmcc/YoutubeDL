@@ -22,6 +22,7 @@ public class YoutubeGetIDs extends YoutubeDLBuilder {
     public void getIDs(List<String> urls) {
         queued.addAll(urls);
         if (!downloading) {
+            downloading = true;
             new Thread(super.setUrls(queued).build()).start();
             queued.clear();
         }

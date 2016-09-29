@@ -1,6 +1,5 @@
-package youtubedl.implementations;
+package youtubedl.builders;
 
-import youtubedl.builders.YoutubeGetIDs;
 import youtubedl.YoutubeDL;
 import java.util.Arrays;
 
