@@ -25,21 +25,20 @@ public class Example {
     public static void main(String[] args) {
 
         //YOUTUBE-DL CONFIGURE
-        YoutubeDL.setExecutable("resources/youtube-dl.exe");                         // Sets the executable (windows)
+        YoutubeDL.setExecutable("resources/youtube-dl.exe");          // Sets the executable
 
         //YOUTUBE-DL BUILDER
-        YoutubeDLBuilder youtubeDLBuilder = new YoutubeDLBuilder();                  // Creates a youtube-dl builder
+        YoutubeDLBuilder builder = new YoutubeDLBuilder();            // Creates a youtube-dl builder
+        builder.setTermination(Command.DEFAULT_TERMINATION_LOGGER);   // Sets the termination logger
+        builder.setInitiation(Command.DEFAULT_INITIATION_LOGGER);     // Sets the termination logger
+        builder.setConsole(Command.DEFAULT_CONSOLE_LOGGER);           // Sets the console listener
 
-        youtubeDLBuilder.setTerminationLogger(YoutubeDL.DEFAULT_TERMINATION_LOGGER); // Sets the termination logger
-        youtubeDLBuilder.setInitiationLogger(YoutubeDL.DEFAULT_INITIATION_LOGGER);   // Sets the termination logger
-        youtubeDLBuilder.setConsoleLogger(YoutubeDL.DEFAULT_CONSOLE_LOGGER);         // Sets the console listener
-
-        youtubeDLBuilder.option(Options.OUTPUT, "resources/%(id)s.%(ext)s");         // Adds an option
-        youtubeDLBuilder.url("https://www.youtube.com/watch?v=jNQXAC9IVRw");         // Adds a url to download
+        builder.option(Options.OUTPUT, "resources/%(id)s.%(ext)s");   // Adds an option
+        builder.url("Some URL");                                      // Adds a url to download
 
         //YOUTUBE-DL EXECUTION
-        YoutubeDL youtubeDL = youtubeDLBuilder.build();                              // Builds a YoutubeDL object
-        new Thread(youtubeDL).start();                                               // Runs the downloader in a new thread
+        Command youtubeDL = builder.build();                          // Builds a Command object
+        new CommandLine().queueCommand(youtubeDL);                    // Runs the downloader in a new thread
     }
 }
 ```
@@ -51,22 +50,22 @@ public class Example {
     public static void main(String[] args) {
 
         //MP3GAIN CONFIGURE
-        MP3Gain.setExecutable("resources/mp3gain.exe");                              // Sets the executable (windows)
+        MP3Gain.setExecutable("resources/mp3gain.exe");               // Sets the executable
 
         //MP3GAIN BUILDER
-        MP3GainBuilder mp3gainBuilder = new MP3GainBuilder();                        // Creates a mp3gain builder
+        MP3GainBuilder builder = new MP3GainBuilder();                // Creates the mp3gain builder
+        builder.setTermination(Command.DEFAULT_TERMINATION_LOGGER);   // Sets the termination logger
+        builder.setInitiation(Command.DEFAULT_INITIATION_LOGGER);     // Sets the termination logger
+        builder.setConsole(Command.DEFAULT_CONSOLE_LOGGER);           // Sets the console listener
 
-        mp3gainBuilder.setTerminationLogger(MP3Gain.DEFAULT_TERMINATION_LOGGER);     // Sets the termination logger
-        mp3gainBuilder.setInitiationLogger(MP3Gain.DEFAULT_INITIATION_LOGGER);       // Sets the termination logger
-        mp3gainBuilder.setConsoleLogger(MP3Gain.DEFAULT_CONSOLE_LOGGER);             // Sets the console listener
-
-        mp3gainBuilder.property(Properties.AUTO_APPLY_TRACK_GAIN);                   // Adds a property
-        mp3gainBuilder.property(Properties.IGNORE_CLIPPING);                         // Adds a property
-        mp3gainBuilder.file("resources/youtube/jNQXAC9IVRw.mp3");                    // Adds a mp3 file
+        builder.property(Properties.AUTO_APPLY_TRACK_GAIN);           // Adds a property
+        builder.property(Properties.IGNORE_CLIPPING);                 // Adds a property
+        builder.property(Properties.QUIET);                           // Adds a property
+        builder.file("Some File");                                    // Adds a file to edit
 
         //MP3GAIN EXECUTION
-        MP3Gain mp3gain = mp3gainBuilder.build();                                    // Builds a MP3Gain object
-        new Thread(mp3gain).start();                                                 // Runs the command in a new thread
+        Command mp3gain = builder.build();                            // Builds a Command object
+        new CommandLine().queueCommand(mp3gain);                      // Runs the downloader in a new thread
     }
 }
 ```
