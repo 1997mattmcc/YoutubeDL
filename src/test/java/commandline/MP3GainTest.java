@@ -3,6 +3,7 @@ package commandline;
 import commandline.executables.mp3gain.MP3Gain.Properties;
 import commandline.executables.mp3gain.MP3GainBuilder;
 import commandline.executables.mp3gain.MP3Gain;
+import java.util.concurrent.Executors;
 
 public class MP3GainTest {
 
@@ -24,6 +25,6 @@ public class MP3GainTest {
 
         //MP3GAIN EXECUTION
         Command mp3gain = builder.build();                            // Builds a Command object
-        new CommandLine().queueCommand(mp3gain);                      // Runs the downloader in a new thread
+        Executors.newSingleThreadExecutor().execute(mp3gain);         // Runs the executable in a new Thread
     }
 }

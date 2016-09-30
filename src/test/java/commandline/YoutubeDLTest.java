@@ -3,6 +3,7 @@ package commandline;
 import commandline.executables.youtubedl.YoutubeDL.Options;
 import commandline.executables.youtubedl.YoutubeDLBuilder;
 import commandline.executables.youtubedl.YoutubeDL;
+import java.util.concurrent.Executors;
 
 public class YoutubeDLTest {
 
@@ -22,6 +23,6 @@ public class YoutubeDLTest {
 
         //YOUTUBE-DL EXECUTION
         Command youtubeDL = builder.build();                          // Builds a Command object
-        new CommandLine().queueCommand(youtubeDL);                    // Runs the downloader in a new thread
+        Executors.newSingleThreadExecutor().execute(youtubeDL);       // Runs the executable in a new Thread
     }
 }

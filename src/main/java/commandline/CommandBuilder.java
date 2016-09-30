@@ -9,7 +9,7 @@ public abstract class CommandBuilder {
 
     protected Consumer<List<String>> termination = Command.DEFAULT_TERMINATION_LOGGER;
     protected Function<String, String> consoleFilter = Command.DEFAULT_CONSOLE_FILTER;
-    protected Consumer<String> initiation = Command.DEFAULT_INITIATION_LOGGER;
+    protected Consumer<Command> initiation = Command.DEFAULT_INITIATION_LOGGER;
     protected Consumer<String> console = Command.DEFAULT_CONSOLE_LOGGER;
 
     protected abstract String getCommandString();
@@ -22,7 +22,7 @@ public abstract class CommandBuilder {
         return Objects.nonNull(this.consoleFilter = consoleFilter) ? this : null;
     }
 
-    public CommandBuilder setInitiation(Consumer<String> initiation) {
+    public CommandBuilder setInitiation(Consumer<Command> initiation) {
         return Objects.nonNull(this.initiation = initiation) ? this : null;
     }
 
